@@ -44,6 +44,8 @@ def upload_csv_to_minio():
                     print(f"Arquivo '{file}' enviado com sucesso para o bucket '{BUCKET_NAME}'.")
                 except S3Error as e:
                     print(f"Erro ao enviar o arquivo '{file}': {e}")
-
 if __name__ == "__main__":
     upload_csv_to_minio()
+
+#ADD UMA FUNÇÃO PARA ESPERAR DADOS NOVOS DA PASTA 
+# FLINK E KAFKA SERÃO NESCESSARIOS?
