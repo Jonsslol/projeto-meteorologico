@@ -48,4 +48,4 @@ if __name__ == "__main__":
     upload_csv_to_minio()
 
 #ADD UMA FUNÇÃO PARA ESPERAR DADOS NOVOS DA PASTA 
-# FLINK E KAFKA SERÃO NESCESSARIOS?
+#FLINK E KAFKA SERÃO NESCESSARIOS?
