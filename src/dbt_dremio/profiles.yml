@@ -7,7 +7,7 @@ dbt_dremio_process:
       object_storage_source:
       password: dremio123
       port: 9047
-      software_host: 192.168.15.2
+      software_host: 192.168.15.4
       threads: 1
       type: dremio
       use_ssl: false

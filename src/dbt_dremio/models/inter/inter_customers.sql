@@ -1,7 +1,9 @@
 with source as (
 select 
-    cast(customer_id as int) as customer_id,
-    cast(customer_name as varchar(50)) as customer_name
-from S3Source.raw."customers.csv"
+    cast(brewery_type as text) as brewery_type,
+    cast(state as text) as state,
+    cast(total_breweries as int ) as total_breweries
+
+from GCS."jvq-test".gold."breweries_aggregated.parquet"
 )
 select * from source

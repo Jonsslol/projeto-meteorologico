@@ -81,4 +81,4 @@ networks:
 
 volumes:
   dremio_data:
-  minio_data:
+  minio_data: 
