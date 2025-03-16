@@ -144,3 +144,4 @@ cython_debug/
 /src/py_ingestor/data/
 /src/py_ingestor/raw/
 data
+raw

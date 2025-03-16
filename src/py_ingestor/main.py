@@ -3,19 +3,22 @@ import time
 from pathlib import Path
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+from watchdog.events import FileCreatedEvent
 from minio import Minio
 from minio.error import S3Error
 from dotenv import load_dotenv
 
-load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", ".env"), override= True)
+print("BUCKET_NAME carregado:", os.getenv("BUCKET_NAME"))
 
 MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
 MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY")
 BUCKET_NAME = os.getenv("BUCKET_NAME")
 DATA_FOLDER = Path(
-    os.path.join(os.path.dirname(__file__), os.getenv("DATA_FOLDER"))
+    os.path.join(os.path.dirname(__file__), "..", "..", os.getenv("DATA_FOLDER"))
 ).resolve()
+
 
 class MinIOUploader(FileSystemEventHandler):
     def __init__(self, client):
@@ -54,7 +57,6 @@ def initialize_minio():
     return client
 
 def main():
-    DATA_FOLDER.mkdir(parents=True, exist_ok=True)
     
     if not DATA_FOLDER.exists():
         raise FileNotFoundError(f"Pasta não encontrada: {DATA_FOLDER}")
@@ -68,7 +70,8 @@ def main():
     event_handler = MinIOUploader(client)
     
     for file in DATA_FOLDER.glob("*.csv"):
-        event_handler.upload_file(str(file), file.name) 
+        event = FileCreatedEvent(str(file))
+        event_handler.on_created(event)
     
     observer = Observer()
     observer.schedule(event_handler, str(DATA_FOLDER), recursive=True) 
@@ -82,7 +85,7 @@ def main():
     observer.join()
 
 print(f"Caminho absoluto da pasta: {DATA_FOLDER}")
-print(f"Arquivos na pasta: {list(DATA_FOLDER.glob('*'))}")
+
 
 if __name__ == "__main__":
     main()

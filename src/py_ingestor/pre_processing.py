@@ -3,8 +3,8 @@ import pandas as pd
 from datetime import datetime
 
 def processar_arquivos():
-    raw_dir = os.path.join('src', 'py_ingestor', 'raw')
-    data_dir = os.path.join('src', 'py_ingestor', 'data')
+    raw_dir = os.path.join('raw')
+    data_dir = os.path.join('data')
     os.makedirs(data_dir, exist_ok=True)
 
     todos_metadados = []
