@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw_clima_tempo
+    database: "S3"  
+    schema: "clima-tempo"  
+    tables:
+      - name: dados  
+        identifier: "dados.csv" 
