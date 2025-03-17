@@ -8,7 +8,6 @@
 SELECT
     CAST("data_medicao" AS DATE) AS dara_de_medicao,
     
-    -- Colunas numéricas com tratamento de strings vazias
     CASE 
         WHEN "precipitacao_total_diario_autmm" = '' THEN NULL 
         ELSE CAST("precipitacao_total_diario_autmm" AS FLOAT) 
@@ -19,7 +18,6 @@ SELECT
         ELSE CAST("pressao_atmosferica_media_diaria_autmb" AS DECIMAL(8,2)) 
     END AS "PRESSAO ATMOSFERICA MEDIA DIARIA (AUT)(mB)",
     
-    -- Padronização das demais colunas seguindo o mesmo padrão
     CASE 
         WHEN "temperatura_do_ponto_de_orvalho_media_diaria_autc" = '' THEN NULL 
         ELSE CAST("temperatura_do_ponto_de_orvalho_media_diaria_autc" AS DECIMAL(5,2)) 
